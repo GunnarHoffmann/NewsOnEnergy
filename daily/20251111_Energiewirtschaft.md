@@ -1,21 +1,21 @@
 # Energiewirtschaft News – 2025-11-11
 
-## 1. COP30: Von Klimagipfeln des Öls zum Klimagipfel der Natur
-**Kurzbeschreibung:** Die Vorbereitung des Weltklimagipfels in Belém findet in einer geopolitisch schwierigen Zeit statt. Die COP30 konzentriert sich auf die Finanzierung der Klimaanpassung und den Tropenwaldschutz, wo noch Erfolge möglich scheinen.
-[Direkt zum Artikel](https://www.energiezukunft.eu/politik/cop30-von-klimagipfeln-des-oels-zum-klimagipfel-der-natur)
+## 1. KI-Boom: Rechenzentren in Deutschland wachsen rasant
+Der KI-Boom führt zu einem massiven Ausbau von Rechenzentrumskapazitäten in Deutschland. Bis zum Jahr 2030 wird ein Anstieg der Leistung um 70 Prozent erwartet, was weitreichende Folgen für den Energiebedarf und die Infrastruktur hat.  
+[Direkt zum Artikel](https://www.heise.de/news/KI-Boom-Rechenzentren-in-Deutschland-wachsen-rasant-9625834.html)
 
-## 2. Bundestag beschließt CO2-Speichergesetz und Gasumlage-Aus
-**Kurzbeschreibung:** Die schwarz-rote Bundestagsmehrheit hat das CO2-Speichergesetz für bestimmte Wirtschaftsbereiche sowie das Ende der Gasspeicherumlage beschlossen. Gaskraftwerke und die Zementindustrie dürfen künftig CO2 abscheiden und speichern.
-[Direkt zum Artikel](https://www.zfk.de/politik/deutschland/energiegesetze-ticker-versorgungssicherheitsbericht-der-netzagentur-bald-im-kabinett)
+## 2. Heineken nutzt 100-MWh-Wärmespeicherbatterie zur Dampferzeugung fürs Bierbrauen
+In einer portugiesischen Heineken-Brauerei wird nun eine große Wärmespeicherbatterie eingesetzt, um Dampf für den Brauprozess CO2-neutral bereitzustellen – und so den Energiebedarf nachhaltiger zu decken.  
+[Direkt zum Artikel](https://www.heise.de/news/Heineken-nutzt-100-MWh-Waermespeicherbatterie-zur-Dampferzeugung-fuers-Bierbrauen-9662092.html)
 
-## 3. Weltweit erster vertikal schwimmender Solarpark in Bayern in Betrieb genommen
-**Kurzbeschreibung:** In Gilching ist auf einem Baggersee die weltweit erste Photovoltaikanlage mit vertikal montierten Modulen ans Netz gegangen – ein Pilotprojekt für innovative Solarenergie-Lösungen.
-[Direkt zum Artikel](https://www.neueenergie.net/wissen/pv-auf-baggersee-weltweit-erster-vertikal-schwimmender-solarpark-in-gilching-geht-in-betrieb)
+## 3. Solarenergie: Australische Haushalte sollen kostenlos Strom beziehen
+Durch die große Zahl an Photovoltaikanlagen wird in Australien so viel Strom erzeugt, dass bestimmte Haushalte künftig mittags kostenlosen Strom erhalten können. Ein Modellversuch startet demnächst in mehreren Städten.  
+[Direkt zum Artikel](https://www.heise.de/news/Solarenergie-Australische-Haushalte-sollen-kostenlos-Strom-beziehen-9654741.html)
 
-## 4. Masterplan Ladeinfrastruktur 2030: Bund stellt Strategie vor
-**Kurzbeschreibung:** Die Bundesregierung hat eine umfassende Strategie für den bundesweiten Ausbau der Ladeinfrastruktur für Elektromobilität vorgestellt. Ziel ist ein zukunftsfähiges Ladenetz bis 2030.
-[Direkt zum Artikel](https://www.iwr.de/news/masterplan-ladeinfrastruktur-2030-bundesregierung-legt-strategie-fuer-zukunftsfaehiges-ladenetz-vor-news38649)
+## 4. Stromnetz wird zum Flaschenhals: Großbritannien mit Problemen beim Anschluss neuer Rechenzentren
+Die digitale Expansion in Großbritannien stößt an Grenzen: Netzbetreiber werden von Anträgen für den Anschluss neuer Rechenzentren überflutet, was die Kapazitäten des Stromnetzes stark beansprucht und zu Engpässen führt.  
+[Direkt zum Artikel](https://www.heise.de/news/Rechenzentren-Boom-Grossbritannien-steht-vor-Stromanschluss-Problemen-9654817.html)
 
-## 5. Europäische Regierungen sollen PPA-Markt stärken
-**Kurzbeschreibung:** Wegen eines starken Einbruchs am europäischen PPA-Markt ruft die Branchenallianz RE-Source zu einer Elektrifizierungsoffensive und gezielter staatlicher Unterstützung auf.
-[Direkt zum Artikel](https://www.energiezukunft.eu/wirtschaft/re-source-europaeische-regierungen-sollten-ppa-markt-staerken)
+## 5. Streit um Smart-Meter-Zahlen: Erfolgreicher Rollout oder Stillstand?
+Der Ausbau von Smart Metern stockt und führt zu Debatten: Experten bemängeln die offiziellen Statistiken, während verschiedene Ursachen für die schleppende Digitalisierung diskutiert werden.  
+[Direkt zum Artikel](https://www.heise.de/news/Streit-um-Smart-Meter-Zahlen-Erfolgreicher-Rollout-oder-Stillstand-9654832.html)
