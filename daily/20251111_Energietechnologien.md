@@ -1,7 +1,7 @@
 # Energietechnologien News – 11.11.2025
 
 **1. Wärmepumpe mit Lüftungsanlage: SCOPtotal als Systemkennwert der Zukunft?**  
-*Eine ITG-Kurzstudie verdeutlicht, dass die Verbindung von Wärmepumpe und Lüftungsanlage mit Wärmerückgewinnung die Energieeffizienz erheblich steigert. Der neue Kennwert SCOPtotal erlaubt eine Synergie-bewertung der Haustechnik und gibt Bauherren und Planern mehr Entscheidungssicherheit.*  
+*Eine ITG-Kurzstudie verdeutlicht, dass die Verbindung von Wärmepumpe und Lüftungsanlage mit Wärmerückgewinnung die Energieeffizienz erheblich steigert. Der neue Kennwert SCOPtotal erlaubt eine Synergie-Bewertung der Haustechnik und gibt Bauherren und Planern mehr Entscheidungssicherheit.*  
 [Artikel anzeigen](https://www.energie-experten.org/news/waermepumpe-mit-lueftungsanlage-scoptotal-als-systemkennwert-der-zukunft){:target="_blank"}  
 **Link geprüft: Korrekt**
 
