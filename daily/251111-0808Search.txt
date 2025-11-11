@@ -1,0 +1,64 @@
+=== META ===
+Generated: 2025-11-11 08:08 CET
+Coverage window: Last 72h
+
+=== NEWS: ENERGY MARKET ===
+- Global energy demand surged by 2.2% in 2024, with electricity consumption growing 4.3% year-on-year, driven by record heat and industrial activity (IEA 2024). A record 700 GW of renewables was installed, and oil demand's share dropped below 30% for the first time.
+URL: https://www.argusmedia.com/en/news-and-insights/latest-market-news/2673003-global-energy-mix-evolves-as-electricity-demand-surges
+Region: Global
+Summary: Surging temperatures and data center growth drove electricity and natural gas consumption sharply higher, but over 80% of new demand was met by renewables and nuclear. Oil demand growth slowed to 0.8%. Key Metrics: +2.2% total energy, +4.3% power, +700 GW renewables. Relevance: Shows how weather and digitalization are actively reshaping demand and the generation mix.
+
+- ExxonMobil sues State of California, claims new climate disclosure laws infringe on free speech rights (Bloomberg, Nov 10, 2025). 
+URL: https://www.bloomberg.com/news/articles/2025-11-10/exxonmobil-sues-california-over-climate-disclosure-laws
+Region: US/California
+Summary: ExxonMobil filed suit to stop Californian law mandating climate-related financial disclosures. The oil major claims such state laws amount to compelled speech in violation of US First Amendment rights. Key Metrics: No direct financials disclosed. Relevance: Major legal pushback against state-led climate regulations, may influence US policy/litigation elsewhere.
+
+- TotalEnergies Mozambique LNG project to restart in early 2026 after years of suspension due to insurgency (Bloomberg, Nov 10, 2025).
+URL: https://www.bloomberg.com/news/articles/2025-11-10/totalenergies-mozambique-lng-project-set-to-restart-in-2026
+Region: Africa/Mozambique/global LNG
+Summary: $20B project restarts after security improvements, expected to supply ~13 Mtpa LNG when operational. Key Metrics: $20 billion, 13 million tons/year capacity. Relevance: Reinforces Africa's rising role in global LNG as European gas buyers seek diversification.
+
+- US imposes new sanctions on Russian oil traders Rosneft, Lukoil to pressure Kremlin finances while keeping oil exports steady (Bloomberg, Nov 10, 2025).
+URL: https://www.bloomberg.com/news/articles/2025-11-10/us-sanctions-rosneft-lukoil-to-choke-off-russia-oil-revenue
+Region: Russia/Global
+Summary: The US aims to reduce Russia's net oil export income with sanctions on two top exporters, but tweaks policy to avoid major price shocks. Key Metrics: Focus on revenue, not volumes. Relevance: Illustrates use of energy trade rules to squeeze opponent state finances amid ongoing war.
+
+=== NEWS: ENERGY TECHNOLOGY ===
+- AI/large data centers to quadruple global power demand by 2035, forcing a shift in grid priorities. Fossil fuels may fill the gap short-term but clean energy required for long-term expansion. (Bloomberg, Nov 9, 2025)
+URL: https://www.bloomberg.com/professional/insights/commodities/ai-data-centers-fuel-quicker-growth-in-power-demand/
+Region: Global/US
+Summary: By 2035 data centers could use 1,600 TWh electricity (4.4% of global), with US, China leading. New AI data center designs and grid links emerge, raising questions of site selection and supply chain speed. Readiness/Risks: TRL 9 infra, major supply constraints, grid stress. Relevance: Key structural load issue for grids, outpacing prior EV/hydrogen demand.
+
+- AI-driven data center electricity demand and reliability supply chain challenges a headline topic for COP30, as modelers predict 2,700 TWh annual demand by 2050 (OilPrice, Nov 5, 2025).
+URL: https://oilprice.com/Energy/Energy-General/Can-COP30-Come-to-Terms-With-the-AI-Energy-Boom.html
+Region: Global
+Summary: Backup power and new turbine orders are escalating, some by 300% in cost with 5+ year lead times. Clean power sourcing and round-the-clock reliability debates emerge as new climate policy front.
+Readiness/Risks: Supply chain, finance, regulatory; heavy grid/capex requirements. Relevance: Data center energy is now central to power, finance and climate policy.
+
+=== NEWS: ENERGY POLITICS & POLICY ===
+- IEA cuts US renewables growth forecast by 45% due to Trump policies (OilPrice.com, Nov 9, 2025).
+URL: https://oilprice.com/Latest-Energy-News/World-News/IEA-Slashes-US-Renewables-Growth-Forecast-Due-to-Trump-Policies.html
+Jurisdiction: US
+Summary: IEA sees federal incentives withdrawn, new import restrictions, and wind/solar project suspensions. US clean capacity growth now expected at ~50% of prior forecast, global forecast also trimmed slightly (~5%) mainly due to China tariff shift. Timeline/Money: ~500 GW vs. earlier 900 GW (2023–30 US forecast). Relevance: Largest downgrade to major advanced economy's renewable growth in recent years.
+
+- ExxonMobil sues California over new state climate disclosure rules, arguing free speech violations (Bloomberg, Nov 10, 2025).
+URL: https://www.bloomberg.com/news/articles/2025-11-10/exxonmobil-sues-california-over-climate-disclosure-laws
+Jurisdiction: US/California
+Summary: ExxonMobil targets state law compelling public companies to report climate-related financial risks. Timeline/Money: Filed Nov 10; implications for US state/federal legal norms. Relevance: Potential precedent for state-vs-corporate regulatory scope on ESG.
+
+- Finland, Germany and others urge tighter enforcement of EU oil import bans on Russia (Bloomberg, Nov 10, 2025).
+URL: https://www.bloomberg.com/news/articles/2025-11-10/finland-germany-urge-tougher-russia-oil-sanctions
+Jurisdiction: EU
+Summary: EU governments press for more aggressive enforcement to further constrict Russian oil revenues, demand closer monitoring of import circumvention. Timeline/Money: Ongoing, no new monetary figures. Relevance: Continues Europe's wider effort to weaken Russia’s energy export leverage.
+
+=== QUICK INSIGHTS (3–5 bullets) ===
+- AI/data center-driven electricity growth is becoming the #1 demand driver, with grids globally bracing for radical new load profiles and heightened reliability risks.
+- Tougher climate rules in California and legal-political pushbacks are escalating legal battles over state-level ESG and disclosure authority versus corporate speech rights.
+- Global gas/LNG and African upstream are focal points of new supply chains, both for diversification (Europe, Asia) and for replacing sanctioned oil flows.
+- US/EU renewable outlooks downgraded, but global investment remains elevated (record 700 GW installs), with most demand growth now met by clean, not fossil, sources.
+- Geopolitics continues to drive decoupling and new regulatory/jurisdictional flashpoints in global energy systems.
+
+=== DISCARDED (DUPLICATES OR NO-URL) ===
+- Bloomberg, "Trump Targets ‘Complete Deal’ With China When He Meets With Xi" — Reason: not energy sector news
+- Duplicates of Bloomberg/OilPrice AI power stories — Reason: earlier version included
+- Link shorteners, paywall/404, or no direct working URL — Reason: strict URL rule
