@@ -1,0 +1,50 @@
+=== META ===
+Generated: 2025-11-11 08:10 CET
+Coverage window: Last 72h
+Included sources: Financial Times, EUbusiness, Politico, Renewables Now
+
+=== EUROPEAN ENERGY MARKET ===
+- Germany electricity prices highest in the EU — EUbusiness — 2025-10-29
+  URL: https://www.eubusiness.com/category/energy/
+  Region: DE, EU
+  Summary: According to Eurostat, Germany reported the highest electricity prices among EU states for the first semester of 2025, at €38.35 per 100 kWh, followed by Belgium and Denmark. The article also notes that renewables constituted nearly 20% of the EU energy supply in the same period.
+  Key Numbers: €38.35 per 100 kWh (Germany), €35.71 (Belgium), €34.85 (Denmark), Renewables ~20% EU energy supply
+
+- Thyssenkrupp among companies linking directly to renewable sources to meet climate goals and control energy costs — Financial Times — 2025-07-28
+  URL: https://www.ft.com/eu-energy
+  Region: DE, EU
+  Summary: European industry, including Thyssenkrupp, is increasingly sourcing energy directly from renewables to control costs and lower emissions, as part of a broader shift away from fossil power. This is contributing to changing cost structures in Europe’s industrial energy markets.
+  Key Numbers: (None explicitly stated in article text)
+
+=== EUROPEAN ENERGY TECHNOLOGY ===
+- Statera Energy secures funds for 680-MW UK storage project — Renewables Now — 2025-11-06
+  URL: https://renewablesnow.com/news/statera-energy-secures-funds-for-680-mw-uk-storage-project-836583/
+  Region: UK
+  Summary: UK-based Statera Energy achieved financial close on the 680-MW/1,360-MWh Carrington Storage project in Greater Manchester, marking a milestone in large-scale electricity storage development.
+  Technical/Risk Notes: GBP 235 million (EUR 266.7m) of debt financing secured
+
+- Hydrogen Solutions AS (Norway) announces FIDs for two 20-MW green hydrogen projects — Renewables Now — 2025-11-06
+  URL: https://renewablesnow.com/news/hydrogen-fid-reached-on-two-nel-equipped-20-mw-hydrogen-projects-in-norway-836668/
+  Region: NO
+  Summary: Norwegian company Hydrogen Solutions AS (HYDS) announced final investment decisions for the Hyfuel and Kaupanes green hydrogen projects, each equipped for 20-MW capacity, marking forward movement for the Nordic hydrogen economy.
+  Technical/Risk Notes: (None provided in visible article text)
+
+=== EUROPEAN ENERGY POLITICS & POLICY ===
+- Don’t weaken new climate goal, EU’s top green official warns on eve of crunch vote — Politico — 2025-11-03
+  URL: https://www.politico.eu/article/eu-climate-goal-teresa-ribera-ministers-warning/
+  Jurisdiction: EU
+  Summary: Teresa Ribera, the EU’s top green official, cautioned ministers that reducing the EU’s 2040 target would result in “wasting money,” emphasizing the financial stakes of the current climate policy debate.
+  Timeline/Money: (No numerical amounts stated in visible article text)
+
+- Germany starts consultation on hydrogen economy amendment — Renewables Now — 2025-11-06
+  URL: https://renewablesnow.com/news/germany-starts-consultation-on-hydrogen-economy-amendment-836678/
+  Jurisdiction: DE
+  Summary: Germany’s economic ministry launched consultations on a draft amendment crucial for ramping up the hydrogen economy and future gas networks. The process involves federal states and energy associations.
+  Timeline/Money: (None provided in visible article text)
+
+=== DISCARDED (duplicates, no-URL, paywall, non-European, no-text) ===
+- JERA Nex bp Belfast Harbour investment — Reason: Non-European leading consortium, region coverage ambiguous, insufficient article text for summary
+- EDF-led group achieves fin close on Saudi solar — Reason: Non-European, irrelevant region
+- US energy/climate headlines on Politico — Reason: Not Europe-focused
+- Sections listing only conference events — Reason: Not news articles
+- Any paywalled subpages of Financial Times — Reason: No visible text
