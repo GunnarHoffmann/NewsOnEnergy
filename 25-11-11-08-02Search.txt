@@ -1,0 +1,91 @@
+=== META ===  
+Generated: 2025-11-11 08:02 CET  
+Coverage window: Last 72h  
+Included sources: Montel News, pv magazine, Directorate-General for Energy (EU), Politico, Power Magazine, Trading Economics, ACER, Argus Media
+
+=== NEWS: EUROPEAN ENERGY MARKET ===  
+- Engie CEO warns of “tighter” European power market supply — Montel News — 2025-11-06  
+  URL: https://montelnews.com/
+  Region: EU  
+  Summary: Engie’s CEO cautioned that European power market supply could be “tighter” in coming months, citing volatility in gas and renewable generation. Market participants expect increased price sensitivity due to supply constraints and evolving weather patterns.  
+  Key Numbers: Not stated in retrieved text.  
+  Relevance: Leadership outlook underscores supply insecurity and volatility as winter approaches.
+
+- TTF Gas fell to €31.47/MWh on November 6 — Trading Economics — 2025-11-06  
+  URL: https://tradingeconomics.com/commodity/eu-natural-gas  
+  Region: EU  
+  Summary: Dutch TTF gas futures continued their decline, reaching €31.47/MWh, down 0.73% day-on-day and 24.28% year-on-year, as mild autumn weather and robust LNG imports curbed heating demand. Market storage now at 83% capacity, 12pp lower year-on-year.  
+  Key Numbers: €31.47/MWh, storage 83% EU capacity.  
+  Relevance: Maintains downward pressure on EU gas prices, showing market resilience but with storage caveats before winter.
+
+- 8 EU states miss 2020 cross-border power goal — Montel News — 2025-11-06  
+  URL: https://montelnews.com/
+  Region: EU  
+  Summary: The European Commission confirmed that 8 member states failed to meet the 2020 cross-border power interconnection targets, impacting market integration and energy security.  
+  Key Numbers: Not stated in retrieved text.  
+  Relevance: Highlights persistent weakness in market coupling and EU energy system integration.
+
+- Wholesale electricity, gas prices drop, but retail bills remain high — EU Commission/ACER — 2025-11-06  
+  URL: https://www.europarl.europa.eu/RegData/docs_autres_institutions/commission_europeenne/com/2025/0072/COM_COM(2025)0072_EN.pdf  
+  Region: EU  
+  Summary: EU wholesale power and gas prices have dropped to €82/MWh (electricity) and about €32/MWh (gas), but consumer bills remain elevated due to taxes and grid charges. Fossil fuel imports still exert pressure on overall costs.  
+  Key Numbers: Power €82/MWh, gas €32/MWh.  
+  Relevance: Shows disconnect between market prices and household cost relief, raising concern over competitiveness.
+
+=== NEWS: EUROPEAN ENERGY TECHNOLOGY ===  
+- EU selects 8 hydrogen projects for €2.9bn funding — pv magazine — 2025-11-07  
+  URL: https://www.pv-magazine.com/2025/11/07/the-hydrogen-stream-eu-selects-8-hydrogen-projects-for-funding/  
+  Region: EU, DK, ES, CZ, FI, IT, EE, NO  
+  Summary: The EU’s Innovation Fund awarded grants to 8 major hydrogen demonstration projects across several member states, targeting integrated hydrogen value chains, buses, and aviation fuel. Projects include hydrogen-powered container ships in Norway and production sites for hydrogen boilers in Italy.  
+  Technical/Risk Notes: Focused on system integration and emission reduction; some projects feature CCUS, onboard generation, and RFNBO certification.  
+  Relevance: Signals rapid scale-up in hydrogen investments as EU looks to diversify clean energy sources.
+
+- LEAG, Fluence building Europe’s largest battery storage project — Power Magazine — 2025-11-07  
+  URL: https://www.powermag.com/leag-fluence-building-europes-largest-battery-energy-storage-project/  
+  Region: DE  
+  Summary: LEAG and Fluence announced a 1GW/4GWh battery installation in Jänschwalde, Germany to support grid flexibility and renewables integration. Construction will use Fluence’s advanced Smartstack technology, aiming to address intermittency and enable constant availability of energy.  
+  Technical/Risk Notes: Intended as growth engine for Germany’s GigawattFactory clean energy hub, the site supports hybrid renewables and storage.  
+  Relevance: Demonstrates major infrastructure commitments to grid modernization in Germany.
+
+- Supercharging the transition with energy storage solutions — Directorate-General for Energy, EU Commission — 2025-09-16  
+  URL: https://energy.ec.europa.eu/news/focus-supercharging-transition-energy-storage-solutions-2025-09-16_en  
+  Region: EU  
+  Summary: Battery costs have declined 93% since 2010; hydropower pumped storage at 46GW capacity provides a quarter of global stored energy. EU expects storage demand to accelerate, especially for mobility and grid-scale solutions.  
+  Technical/Risk Notes: Storage technology vital for matching renewables variability and EU supply targets.  
+  Relevance: Underlines critical role that energy storage tech is expected to play in meeting EU renewables goals.
+
+=== NEWS: EUROPEAN ENERGY POLITICS & POLICY ===  
+- Energy Union Task Force examines measures to bring down prices — EU Commission — 2025-11-04  
+  URL: https://energy.ec.europa.eu/news/energy-union-task-force-examines-measures-bring-down-energy-prices-2025-11-04_en  
+  Jurisdiction: EU  
+  Summary: EU Energy Union Task Force met to discuss immediate and longer-term actions bringing down energy prices, focusing on State aid, EU funds, infrastructure, tax cuts, and market support for renewables. Although average wholesale prices have fallen sharply, bills remain high due to structural factors.  
+  Timeline/Money: Current average prices: €30–35/MWh (gas), €82/MWh (power); peak crisis prices were €150–300/MWh (gas), €400/MWh (power).  
+  Relevance: Signals coordinated EU efforts to lower consumer and industrial energy bills via regulatory and fiscal measures.
+
+- EU climate officials warn against weakening new 2040 targets — Politico — 2025-11-03  
+  URL: https://www.politico.eu/section/energy/  
+  Jurisdiction: EU  
+  Summary: Teresa Ribera (EU senior official) cautioned governments that weakening 2040 climate targets would “invite waste” and harm competitiveness and future resilience. Disagreements persist on how to budget forest absorption and land use in emissions accounting.  
+  Timeline/Money: Not specified.  
+  Relevance: Indicates tension among member states on ambition for 2040 goals as political discussions intensify.
+
+- Denmark signals energy infrastructure, climate priorities during EU presidency — Clean Energy Wire — 2025-11-05  
+  URL: https://www.cleanenergywire.org/factsheets/whats-next-europe-timeline-european-climate-and-energy-policy  
+  Jurisdiction: EU, DK  
+  Summary: Denmark, which took over the EU Council Presidency in July, is prioritizing grid plans, new climate targets and ending Russian imports. Accelerated roll-out of recharging infrastructure and high-speed rail also planned.  
+  Timeline/Money: 2H 2025 policy window, emphasis on supporting transport/energy projects.  
+  Relevance: Demonstrates Member State leadership in advancing EU grid and supply diversification policies.
+
+=== CROSS-SECTION INSIGHTS ===  
+- Despite falling wholesale prices for power and gas, retail bills remain persistently high, mainly due to taxes and network charges.  
+- Expansion of the hydrogen economy and battery storage marks a tangible ramp-up in clean tech infrastructure across Europe.  
+- Grid integration and cross-border capacity shortfalls remain a top bottleneck for market and policy efficiency.  
+- The EU is actively combining regulatory tweaks, direct funding, and infrastructure programs to address price, supply, and transition challenges.  
+- Disagreement among Member States (notably on climate targets) may affect pace of future decarbonization rules.
+
+=== DISCARDED (duplicates, no-URL, paywall, no-content, non-European) ===  
+- Duplicate Montel News stories about Engie, grid auctions, and interconnection (kept earliest version).  
+- Argus Media cross-border preview (URL public, but content requires registration for detail).  
+- Financial Times EU energy news (non-resolving URL/test access).  
+- Politico duplicate climate headlines (kept clearest version).  
+- Euronews “Energy” section (high-level summaries, no specific news item found for last 72h).
