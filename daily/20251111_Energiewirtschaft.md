@@ -1,21 +1,33 @@
-# Energiewirtschaft News – 2025-11-11
+# Top 5 News zur Energiewirtschaft am 11.11.2025
 
 ## 1. KI-Boom: Rechenzentren in Deutschland wachsen rasant
-Der KI-Boom führt zu einem massiven Ausbau von Rechenzentrumskapazitäten in Deutschland. Bis zum Jahr 2030 wird ein Anstieg der Leistung um 70 Prozent erwartet, was weitreichende Folgen für den Energiebedarf und die Infrastruktur hat.  
-[Direkt zum Artikel](https://www.heise.de/news/KI-Boom-Rechenzentren-in-Deutschland-wachsen-rasant-9625834.html)
+**Kurzbeschreibung:** Der KI-Boom lässt Rechenzentrumskapazitäten in Deutschland stark wachsen. Bis 2030 soll die Leistung um 70 Prozent steigen, was erhebliche Auswirkungen auf die Infrastruktur und den Energiebedarf haben wird.
+[Zum Artikel](https://www.heise.de/news/KI-Boom-Rechenzentren-in-Deutschland-wachsen-rasant-9607212.html)
 
-## 2. Heineken nutzt 100-MWh-Wärmespeicherbatterie zur Dampferzeugung fürs Bierbrauen
-In einer portugiesischen Heineken-Brauerei wird nun eine große Wärmespeicherbatterie eingesetzt, um Dampf für den Brauprozess CO2-neutral bereitzustellen – und so den Energiebedarf nachhaltiger zu decken.  
-[Direkt zum Artikel](https://www.heise.de/news/Heineken-nutzt-100-MWh-Waermespeicherbatterie-zur-Dampferzeugung-fuers-Bierbrauen-9662092.html)
+---
 
-## 3. Solarenergie: Australische Haushalte sollen kostenlos Strom beziehen
-Durch die große Zahl an Photovoltaikanlagen wird in Australien so viel Strom erzeugt, dass bestimmte Haushalte künftig mittags kostenlosen Strom erhalten können. Ein Modellversuch startet demnächst in mehreren Städten.  
-[Direkt zum Artikel](https://www.heise.de/news/Solarenergie-Australische-Haushalte-sollen-kostenlos-Strom-beziehen-9654741.html)
+## 2. COP30 – Weltklimakonferenz zwischen Ambition und Realität
+**Kurzbeschreibung:** Das 1,5-Grad-Ziel ist kaum noch erreichbar, die Kluft zwischen Anspruch und Realität wächst. Bei der COP30 in Belém, Brasilien, müssen neue Strategien für den globalen Klimaschutz entwickelt werden.
+[Zum Artikel](https://www.energiezukunft.eu/politik/cop30-die-weltklimakonferenz-zwischen-ambition-und-realitaet/)
 
-## 4. Stromnetz wird zum Flaschenhals: Großbritannien mit Problemen beim Anschluss neuer Rechenzentren
-Die digitale Expansion in Großbritannien stößt an Grenzen: Netzbetreiber werden von Anträgen für den Anschluss neuer Rechenzentren überflutet, was die Kapazitäten des Stromnetzes stark beansprucht und zu Engpässen führt.  
-[Direkt zum Artikel](https://www.heise.de/news/Rechenzentren-Boom-Grossbritannien-steht-vor-Stromanschluss-Problemen-9654817.html)
+---
 
-## 5. Streit um Smart-Meter-Zahlen: Erfolgreicher Rollout oder Stillstand?
-Der Ausbau von Smart Metern stockt und führt zu Debatten: Experten bemängeln die offiziellen Statistiken, während verschiedene Ursachen für die schleppende Digitalisierung diskutiert werden.  
-[Direkt zum Artikel](https://www.heise.de/news/Streit-um-Smart-Meter-Zahlen-Erfolgreicher-Rollout-oder-Stillstand-9654832.html)
+## 3. Heineken nutzt 100-MWh-Wärmespeicherbatterie zur Dampferzeugung für die Brauerei
+**Kurzbeschreibung:** Eine portugiesische Brauerei von Heineken setzt erstmals eine Wärmespeicherbatterie zur CO₂-neutralen Dampferzeugung ein. Damit setzt das Unternehmen neue Maßstäbe beim nachhaltigen Bierbrauen.
+[Zum Artikel](https://www.heise.de/news/Heineken-nutzt-100-MWh-Waermespeicherbatterie-zur-Dampferzeugung-fuers-Bierbrauen-9606366.html)
+
+---
+
+## 4. Ladeinfrastrukturen an Autobahn: ADAC-Test deckt Defizite auf
+**Kurzbeschreibung:** Der ADAC hat ein Dutzend Rastanlagen bezüglich Ladeinfrastruktur für E-Mobilität getestet und große Defizite festgestellt. Das Ausbautempo ist zu langsam, um der wachsenden Nachfrage gerecht zu werden.
+[Zum Artikel](https://www.iwr.de/news.php?id=38555)
+
+---
+
+## 5. Öl- und Gasindustrie expandiert ungebremst
+**Kurzbeschreibung:** Trotz Klimakrise wächst die Öl- und Gasindustrie weltweit weiterhin stark. Die Branche steht zunehmend in der Kritik, da fossile Energien im Fokus bleiben und nachhaltige Alternativen ausgebremst werden.
+[Zum Artikel](https://www.energiezukunft.eu/wirtschaft/gogel-2025-oel-und-gasindustrie-expandiert-ungebremst/)
+
+---
+
+Diese News wurden am 11.11.2025 recherchiert und zusammengestellt.
