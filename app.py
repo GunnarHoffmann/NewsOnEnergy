@@ -191,10 +191,7 @@ def parse_article_format3(text):
         description_parts = []
 
         # Get text before the link (usually the main description)
-        text_before_link = entry.split('[')[0] if '[' in entry else entry
-        # Remove title from the beginning
-        text_before_link = '\n'.join(lines[1:])
-        text_before_link = text_before_link.split('[')[0].strip()
+        text_before_link = '\n'.join(lines[1:]).split('[')[0].strip()
         if text_before_link:
             description_parts.append(text_before_link)
 
