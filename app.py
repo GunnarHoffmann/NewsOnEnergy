@@ -387,7 +387,7 @@ else:
             # Display summary
             st.divider()
             st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
-            st.caption(f"Topics: {', '.join(selected_categories)}")
+            st.caption("Agent View")
 
             # Display articles as tiles
             if unique_articles:
