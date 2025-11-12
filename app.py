@@ -120,6 +120,31 @@ h2, h3 {
 .stSelectbox, .stMultiSelect, .stDateInput {
     font-family: 'Inter', sans-serif;
 }
+
+/* Stylish caption */
+.stylish-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #EA1C0A;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: -8px;
+    margin-bottom: 24px;
+    padding-left: 4px;
+    position: relative;
+    display: inline-block;
+}
+
+.stylish-caption::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #EA1C0A 0%, rgba(234,28,10,0) 100%);
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -476,7 +501,7 @@ with tab1:
                 # Display summary
                 st.divider()
                 st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
-                st.caption("Agent View")
+                st.markdown('<div class="stylish-caption">Agent View</div>', unsafe_allow_html=True)
 
                 # Display articles as tiles in 3-column grid
                 if unique_articles:
