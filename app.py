@@ -214,6 +214,44 @@ def parse_article_format3(text):
 
     return articles
 
+def parse_article_format4(text):
+    """Parse format: N. **Title** *Description* [Link](url)"""
+    articles = []
+    # Split by numbered entries (1. 2. 3. etc.)
+    # Match both at start of file and after newlines
+    entries = re.split(r'(?:^|\n)(\d+)\.\s+', text)
+
+    # entries will be: ['', '1', 'content1', '2', 'content2', ...]
+    # Process in pairs (number, content)
+    for i in range(1, len(entries), 2):
+        if i + 1 >= len(entries):
+            break
+
+        entry = entries[i + 1]
+
+        # Extract title from **Title**
+        title_match = re.search(r'\*\*(.+?)\*\*', entry)
+        if not title_match:
+            continue
+        title = title_match.group(1).strip()
+
+        # Extract description from *Description* (italic text)
+        desc_match = re.search(r'(?<!\*)\*([^*]+?)\*(?!\*)', entry)
+        description = desc_match.group(1).strip() if desc_match else ""
+
+        # Extract URL from [text](url)
+        url_match = re.search(r'\[.*?\]\((https?://[^\)]+)\)', entry)
+        url = url_match.group(1) if url_match else ""
+
+        if title:
+            articles.append({
+                'title': title,
+                'description': description,
+                'url': url
+            })
+
+    return articles
+
 def parse_articles_from_file(file_path):
     """Parse articles from a markdown file, auto-detecting format."""
     try:
@@ -227,6 +265,9 @@ def parse_articles_from_file(file_path):
         # Check for ## headers with **Kurzbeschreibung:** (format 2)
         elif '**Kurzbeschreibung:**' in content:
             return parse_article_format2(content)
+        # Check for format 4: N. **Title** (number before bold)
+        elif re.search(r'(?:^|\n)\d+\.\s+\*\*', content):
+            return parse_article_format4(content)
         # Default to format 1 (bold numbered entries)
         else:
             return parse_article_format1(content)
