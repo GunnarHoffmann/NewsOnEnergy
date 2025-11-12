@@ -422,7 +422,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Create tabs
-tab1, tab2 = st.tabs(["Show agent news", "Show agent events"])
+tab1, tab2 = st.tabs(["show news", "show events"])
 
 with tab1:
     # Create two columns for the selectors
