@@ -16,47 +16,72 @@ st.set_page_config(
 st.markdown("""
 <style>
 .article-tile {
-    background-color: #f0f2f6;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px 0;
-    border-left: 5px solid #1f77b4;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    border-left: 6px solid #1f77b4;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    cursor: pointer;
+    position: relative;
 }
 .article-tile:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(31,119,180,0.15);
+    transform: translateY(-4px);
+    border-left-color: #0d5aa7;
 }
 .article-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #1f77b4;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.4;
 }
 .article-description {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 14px;
 }
 .article-link {
-    display: inline-block;
-    margin-top: 10px;
-    color: #1f77b4;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 10px 20px;
+    background-color: #1f77b4;
+    color: white !important;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
 }
 .article-link:hover {
-    text-decoration: underline;
+    background-color: #0d5aa7;
+    transform: translateX(4px);
+    text-decoration: none;
+}
+.article-link::after {
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+.article-link:hover::after {
+    transform: translateX(4px);
 }
 .category-badge {
     display: inline-block;
-    background-color: #e0e7ff;
-    color: #4c51bf;
-    padding: 4px 12px;
-    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
     font-size: 12px;
-    margin-bottom: 8px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -144,6 +169,50 @@ def parse_article_format2(text):
 
     return articles
 
+def parse_article_format3(text):
+    """Parse format: ### N. Title \n Description \n [Mehr lesen](url) \n _Kurzbeschreibung:..._"""
+    articles = []
+    # Split by ### headers
+    entries = re.split(r'\n### \d+\.', text)
+
+    for entry in entries[1:]:  # Skip first empty split
+        lines = entry.strip().split('\n')
+        if not lines:
+            continue
+
+        # Title is first line
+        title = lines[0].strip()
+
+        # Extract URL from [Mehr lesen](url) or similar markdown links
+        url_match = re.search(r'\[.*?\]\((https?://[^\)]+)\)', entry)
+        url = url_match.group(1) if url_match else ""
+
+        # Build description from multiple sources
+        description_parts = []
+
+        # Get text before the link (usually the main description)
+        text_before_link = '\n'.join(lines[1:]).split('[')[0].strip()
+        if text_before_link:
+            description_parts.append(text_before_link)
+
+        # Extract Kurzbeschreibung if present
+        kurz_match = re.search(r'_Kurzbeschreibung:\s*(.*?)_', entry, re.DOTALL)
+        if kurz_match:
+            kurz_text = kurz_match.group(1).strip()
+            if kurz_text and kurz_text not in text_before_link:
+                description_parts.append(kurz_text)
+
+        description = ' '.join(description_parts).strip()
+
+        if title and description:
+            articles.append({
+                'title': title,
+                'description': description,
+                'url': url
+            })
+
+    return articles
+
 def parse_articles_from_file(file_path):
     """Parse articles from a markdown file, auto-detecting format."""
     try:
@@ -151,8 +220,13 @@ def parse_articles_from_file(file_path):
             content = f.read()
 
         # Detect format and parse accordingly
-        if '**Kurzbeschreibung:**' in content:
+        # Check for ### headers (format 3 - weekly format)
+        if re.search(r'\n### \d+\.', content):
+            return parse_article_format3(content)
+        # Check for ## headers with **Kurzbeschreibung:** (format 2)
+        elif '**Kurzbeschreibung:**' in content:
             return parse_article_format2(content)
+        # Default to format 1 (bold numbered entries)
         else:
             return parse_article_format1(content)
 
@@ -193,6 +267,10 @@ def display_article_tile(article, category):
     description = article.get('description', '')
     url = article.get('url', '')
 
+    # Escape HTML special characters to prevent rendering issues
+    title = html.escape(title)
+    description = html.escape(description)
+
     # Create tile HTML
     tile_html = f"""
     <div class="article-tile">
@@ -202,7 +280,7 @@ def display_article_tile(article, category):
     """
 
     if url:
-        tile_html += f'<a href="{url}" target="_blank" class="article-link">→ Zum Artikel</a>'
+        tile_html += f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="article-link">Artikel lesen</a>'
 
     tile_html += "</div>"
 
