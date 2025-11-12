@@ -397,8 +397,29 @@ def display_article_tile(article, category):
 
     st.markdown(tile_html, unsafe_allow_html=True)
 
-# Title
-st.title("Agent viewer")
+# Title with professional caption
+st.markdown("""
+<div style="margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <rect x="3" y="3" width="8" height="8" rx="1" stroke="#EA1C0A" stroke-width="1.5" fill="none"/>
+            <rect x="13" y="3" width="8" height="8" rx="1" stroke="#EA1C0A" stroke-width="1.5" fill="none"/>
+            <rect x="3" y="13" width="8" height="8" rx="1" stroke="#EA1C0A" stroke-width="1.5" fill="none"/>
+            <rect x="13" y="13" width="8" height="8" rx="1" stroke="#EA1C0A" stroke-width="1.5" fill="none"/>
+            <circle cx="7" cy="7" r="1.5" fill="#EA1C0A"/>
+            <circle cx="17" cy="7" r="1.5" fill="#EA1C0A"/>
+            <path d="M5 17L9 17" stroke="#EA1C0A" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 17L19 17" stroke="#EA1C0A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h1 style="margin: 0; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2.5rem; color: #1a1a1a; letter-spacing: -0.02em;">
+            Agent Viewer
+        </h1>
+    </div>
+    <div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #5a5a5a; font-weight: 400; padding-left: 40px;">
+        Monitor and analyze AI-curated news across multiple topics
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # Create tabs
 tab1, tab2 = st.tabs(["Show agent news", "Show agent events"])
