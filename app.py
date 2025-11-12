@@ -13,58 +13,112 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for article tiles
+# Custom CSS for article tiles - E.ON inspired professional design
 st.markdown("""
 <style>
+/* Import professional fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+/* Global styling */
+.stApp {
+    font-family: 'Inter', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Article tile link wrapper */
 .article-tile-link {
     display: block;
     text-decoration: none;
     color: inherit;
+    position: relative;
+    z-index: 1;
 }
 .article-tile-link:hover {
     text-decoration: none;
 }
+.article-tile-link:visited {
+    color: inherit;
+}
+
+/* Article tile - E.ON professional style */
 .article-tile {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 10px;
-    padding: 16px;
-    margin: 12px 0;
-    border-left: 4px solid #1f77b4;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #ffffff;
+    border-radius: 2px;
+    padding: 24px 20px;
+    margin: 0 0 16px 0;
+    border-left: 3px solid #EA1C0A;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
     cursor: pointer;
     position: relative;
     height: 100%;
+    min-height: 160px;
 }
 .article-tile:hover {
-    box-shadow: 0 6px 16px rgba(31,119,180,0.15);
-    transform: translateY(-3px);
-    border-left-color: #0d5aa7;
+    box-shadow: 0 4px 12px rgba(234,28,10,0.12), 0 2px 6px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+    border-left-color: #c01608;
 }
+
+/* Article title */
 .article-title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 600;
     color: #1a1a1a;
-    margin-bottom: 10px;
-    line-height: 1.3;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
 }
+
+/* Article description */
 .article-description {
     font-size: 13px;
-    color: #555;
+    color: #5a5a5a;
     line-height: 1.6;
     margin-bottom: 0;
+    font-weight: 400;
 }
+
+/* Category badge - E.ON red accent */
 .category-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #EA1C0A;
     color: white;
-    padding: 4px 10px;
-    border-radius: 16px;
+    padding: 5px 12px;
+    border-radius: 2px;
     font-size: 10px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header styling */
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+}
+
+h2, h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #2a2a2a;
+}
+
+/* Streamlit button customization for E.ON style */
+.stButton > button {
+    border-radius: 2px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+/* Selectbox and input styling */
+.stSelectbox, .stMultiSelect, .stDateInput {
+    font-family: 'Inter', sans-serif;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -294,12 +348,13 @@ def display_article_tile(article, category):
     # Escape HTML special characters to prevent rendering issues
     title = html.escape(title)
     description = html.escape(description)
+    url_escaped = html.escape(url) if url else ''
 
     # Create tile HTML - wrap entire tile in a link if URL exists
     if url:
         tile_html = f"""
-        <a href="{url}" target="_blank" rel="noopener noreferrer" class="article-tile-link">
-            <div class="article-tile">
+        <a href="{url_escaped}" target="_blank" rel="noopener noreferrer" class="article-tile-link" style="pointer-events: all;">
+            <div class="article-tile" style="pointer-events: none;">
                 <div class="category-badge">{category}</div>
                 <div class="article-title">{title}</div>
                 <div class="article-description">{description}</div>
@@ -308,7 +363,7 @@ def display_article_tile(article, category):
         """
     else:
         tile_html = f"""
-        <div class="article-tile">
+        <div class="article-tile" style="opacity: 0.7;">
             <div class="category-badge">{category}</div>
             <div class="article-title">{title}</div>
             <div class="article-description">{description}</div>
