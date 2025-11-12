@@ -8,7 +8,7 @@ from collections import defaultdict
 
 # Page configuration
 st.set_page_config(
-    page_title="Agent news viewer",
+    page_title="Agent viewer",
     page_icon="⚡",
     layout="wide"
 )
@@ -373,7 +373,7 @@ def display_article_tile(article, category):
     st.markdown(tile_html, unsafe_allow_html=True)
 
 # Title
-st.title("⚡ Agent news viewer")
+st.title("Agent viewer")
 
 # Create tabs
 tab1, tab2 = st.tabs(["Show agent news", "Show agent events"])
