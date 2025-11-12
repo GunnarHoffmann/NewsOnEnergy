@@ -271,8 +271,8 @@ def display_article_tile(article, category):
     url = article.get('url', '')
 
     # Escape HTML special characters to prevent rendering issues
-    title = title.replace('<', '&lt;').replace('>', '&gt;')
-    description = description.replace('<', '&lt;').replace('>', '&gt;')
+    title = html.escape(title)
+    description = html.escape(description)
 
     # Create tile HTML
     tile_html = f"""
