@@ -8,7 +8,7 @@ from collections import defaultdict
 
 # Page configuration
 st.set_page_config(
-    page_title="News On Energy Viewer",
+    page_title="Agent news viewer",
     page_icon="⚡",
     layout="wide"
 )
@@ -288,7 +288,7 @@ def display_article_tile(article, category):
     st.markdown(tile_html, unsafe_allow_html=True)
 
 # Title
-st.title("⚡ News On Energy Viewer")
+st.title("⚡ Agent news viewer")
 
 # Create two columns for the selectors
 col1, col2 = st.columns(2)
