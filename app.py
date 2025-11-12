@@ -375,121 +375,128 @@ def display_article_tile(article, category):
 # Title
 st.title("⚡ Agent news viewer")
 
-# Create two columns for the selectors
-col1, col2 = st.columns(2)
+# Create tabs
+tab1, tab2 = st.tabs(["Show agent news", "Show agent events"])
 
-with col1:
-    # View type selector
-    view_type = st.selectbox(
-        "Select View Type",
-        ["Daily", "Weekly"],
-        index=0
-    )
+with tab1:
+    # Create two columns for the selectors
+    col1, col2 = st.columns(2)
 
-# Determine directory based on view type
-directory = "DAILY" if view_type == "Daily" else "WEEKLY"
-dir_path = Path(directory)
-
-# Get available dates for the selected view
-available_dates = get_available_dates(directory)
-
-with col2:
-    # Date selector with info about available dates
-    if available_dates:
-        min_date = min(available_dates)
-        max_date = max(available_dates)
-
-        selected_date = st.date_input(
-            f"Select Date ({len(available_dates)} dates available)",
-            value=max_date,  # Default to most recent date
-            min_value=min_date,
-            max_value=max_date
+    with col1:
+        # View type selector
+        view_type = st.selectbox(
+            "Select View Type",
+            ["Daily", "Weekly"],
+            index=0
         )
 
-        # Show info if selected date is not available
-        if selected_date not in available_dates:
-            st.warning(f"⚠️ No data available for {selected_date.strftime('%Y-%m-%d')}. Available dates: {len(available_dates)}")
-    else:
-        selected_date = st.date_input(
-            "Select Date",
-            value=datetime.now(),
-            max_value=datetime.now()
-        )
-        st.error(f"No data found in '{directory}' directory!")
+    # Determine directory based on view type
+    directory = "DAILY" if view_type == "Daily" else "WEEKLY"
+    dir_path = Path(directory)
 
-# Format date as YYYYMMDD
-date_str = selected_date.strftime("%Y%m%d")
+    # Get available dates for the selected view
+    available_dates = get_available_dates(directory)
 
-# Check if directory exists
-if not dir_path.exists():
-    st.error(f"Directory '{directory}' not found!")
-else:
-    # Find all files for the selected date
-    pattern = f"{date_str}_*.md"
-    matching_files = list(dir_path.glob(pattern))
-
-    if not matching_files:
-        st.warning(f"No files found for date {selected_date.strftime('%Y-%m-%d')} in {view_type} view.")
+    with col2:
+        # Date selector with info about available dates
         if available_dates:
-            st.info(f"Try one of these available dates: {', '.join([d.strftime('%Y-%m-%d') for d in sorted(available_dates, reverse=True)[:5]])}")
-    else:
-        # Extract categories from filenames
-        categories = []
-        for file in matching_files:
-            # Extract category name (part after date and underscore, before .md)
-            category = file.stem.replace(f"{date_str}_", "")
-            categories.append(category)
+            min_date = min(available_dates)
+            max_date = max(available_dates)
 
-        # Multi-select for categories
-        st.subheader("Select Topics")
-        selected_categories = st.multiselect(
-            "Available topics (select one or more)",
-            categories,
-            default=categories  # Select all by default
-        )
+            selected_date = st.date_input(
+                f"Select Date ({len(available_dates)} dates available)",
+                value=max_date,  # Default to most recent date
+                min_value=min_date,
+                max_value=max_date
+            )
 
-        if not selected_categories:
-            st.info("Please select at least one topic to view articles.")
+            # Show info if selected date is not available
+            if selected_date not in available_dates:
+                st.warning(f"⚠️ No data available for {selected_date.strftime('%Y-%m-%d')}. Available dates: {len(available_dates)}")
         else:
-            # Collect all articles from selected categories
-            all_articles = []
-            category_map = {}  # Map articles to their source category
+            selected_date = st.date_input(
+                "Select Date",
+                value=datetime.now(),
+                max_value=datetime.now()
+            )
+            st.error(f"No data found in '{directory}' directory!")
 
-            for category in selected_categories:
-                file_path = dir_path / f"{date_str}_{category}.md"
-                articles = parse_articles_from_file(file_path)
+    # Format date as YYYYMMDD
+    date_str = selected_date.strftime("%Y%m%d")
 
-                for article in articles:
-                    all_articles.append(article)
-                    # Store which category this article came from
-                    article_key = article.get('url', '') or article.get('title', '')
-                    if article_key not in category_map:
-                        category_map[article_key] = category
+    # Check if directory exists
+    if not dir_path.exists():
+        st.error(f"Directory '{directory}' not found!")
+    else:
+        # Find all files for the selected date
+        pattern = f"{date_str}_*.md"
+        matching_files = list(dir_path.glob(pattern))
 
-            # Deduplicate articles
-            unique_articles = deduplicate_articles(all_articles)
+        if not matching_files:
+            st.warning(f"No files found for date {selected_date.strftime('%Y-%m-%d')} in {view_type} view.")
+            if available_dates:
+                st.info(f"Try one of these available dates: {', '.join([d.strftime('%Y-%m-%d') for d in sorted(available_dates, reverse=True)[:5]])}")
+        else:
+            # Extract categories from filenames
+            categories = []
+            for file in matching_files:
+                # Extract category name (part after date and underscore, before .md)
+                category = file.stem.replace(f"{date_str}_", "")
+                categories.append(category)
 
-            # Display summary
-            st.divider()
-            st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
-            st.caption("Agent View")
+            # Multi-select for categories
+            st.subheader("Select Topics")
+            selected_categories = st.multiselect(
+                "Available topics (select one or more)",
+                categories,
+                default=categories  # Select all by default
+            )
 
-            # Display articles as tiles in 3-column grid
-            if unique_articles:
-                # Create 3 columns for responsive grid layout
-                cols = st.columns(3)
-
-                # Distribute articles across columns
-                for idx, article in enumerate(unique_articles):
-                    article_key = article.get('url', '') or article.get('title', '')
-                    category = category_map.get(article_key, selected_categories[0])
-
-                    # Use modulo to cycle through columns
-                    with cols[idx % 3]:
-                        display_article_tile(article, category)
+            if not selected_categories:
+                st.info("Please select at least one topic to view articles.")
             else:
-                st.warning("No articles found in the selected files.")
+                # Collect all articles from selected categories
+                all_articles = []
+                category_map = {}  # Map articles to their source category
 
-# Footer
-st.divider()
-st.caption(f"Viewing from: {dir_path.absolute()}")
+                for category in selected_categories:
+                    file_path = dir_path / f"{date_str}_{category}.md"
+                    articles = parse_articles_from_file(file_path)
+
+                    for article in articles:
+                        all_articles.append(article)
+                        # Store which category this article came from
+                        article_key = article.get('url', '') or article.get('title', '')
+                        if article_key not in category_map:
+                            category_map[article_key] = category
+
+                # Deduplicate articles
+                unique_articles = deduplicate_articles(all_articles)
+
+                # Display summary
+                st.divider()
+                st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
+                st.caption("Agent View")
+
+                # Display articles as tiles in 3-column grid
+                if unique_articles:
+                    # Create 3 columns for responsive grid layout
+                    cols = st.columns(3)
+
+                    # Distribute articles across columns
+                    for idx, article in enumerate(unique_articles):
+                        article_key = article.get('url', '') or article.get('title', '')
+                        category = category_map.get(article_key, selected_categories[0])
+
+                        # Use modulo to cycle through columns
+                        with cols[idx % 3]:
+                            display_article_tile(article, category)
+                else:
+                    st.warning("No articles found in the selected files.")
+
+    # Footer
+    st.divider()
+    st.caption(f"Viewing from: {dir_path.absolute()}")
+
+with tab2:
+    st.info("in progress")
