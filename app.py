@@ -16,71 +16,53 @@ st.set_page_config(
 # Custom CSS for article tiles
 st.markdown("""
 <style>
+.article-tile-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+.article-tile-link:hover {
+    text-decoration: none;
+}
 .article-tile {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 12px;
-    padding: 24px;
-    margin: 16px 0;
-    border-left: 6px solid #1f77b4;
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+    border-left: 4px solid #1f77b4;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     cursor: pointer;
     position: relative;
+    height: 100%;
 }
 .article-tile:hover {
-    box-shadow: 0 8px 20px rgba(31,119,180,0.15);
-    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(31,119,180,0.15);
+    transform: translateY(-3px);
     border-left-color: #0d5aa7;
 }
 .article-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 12px;
-    line-height: 1.4;
+    margin-bottom: 10px;
+    line-height: 1.3;
 }
 .article-description {
-    font-size: 15px;
+    font-size: 13px;
     color: #555;
-    line-height: 1.7;
-    margin-bottom: 14px;
-}
-.article-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-    padding: 10px 20px;
-    background-color: #1f77b4;
-    color: white !important;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-}
-.article-link:hover {
-    background-color: #0d5aa7;
-    transform: translateX(4px);
-    text-decoration: none;
-}
-.article-link::after {
-    content: '→';
-    font-size: 16px;
-    transition: transform 0.2s ease;
-}
-.article-link:hover::after {
-    transform: translateX(4px);
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 .category-badge {
     display: inline-block;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 10px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -313,18 +295,25 @@ def display_article_tile(article, category):
     title = html.escape(title)
     description = html.escape(description)
 
-    # Create tile HTML
-    tile_html = f"""
-    <div class="article-tile">
-        <div class="category-badge">{category}</div>
-        <div class="article-title">{title}</div>
-        <div class="article-description">{description}</div>
-    """
-
+    # Create tile HTML - wrap entire tile in a link if URL exists
     if url:
-        tile_html += f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="article-link">Artikel lesen</a>'
-
-    tile_html += "</div>"
+        tile_html = f"""
+        <a href="{url}" target="_blank" rel="noopener noreferrer" class="article-tile-link">
+            <div class="article-tile">
+                <div class="category-badge">{category}</div>
+                <div class="article-title">{title}</div>
+                <div class="article-description">{description}</div>
+            </div>
+        </a>
+        """
+    else:
+        tile_html = f"""
+        <div class="article-tile">
+            <div class="category-badge">{category}</div>
+            <div class="article-title">{title}</div>
+            <div class="article-description">{description}</div>
+        </div>
+        """
 
     st.markdown(tile_html, unsafe_allow_html=True)
 
@@ -430,12 +419,19 @@ else:
             st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
             st.caption("Agent View")
 
-            # Display articles as tiles
+            # Display articles as tiles in 3-column grid
             if unique_articles:
-                for article in unique_articles:
+                # Create 3 columns for responsive grid layout
+                cols = st.columns(3)
+
+                # Distribute articles across columns
+                for idx, article in enumerate(unique_articles):
                     article_key = article.get('url', '') or article.get('title', '')
                     category = category_map.get(article_key, selected_categories[0])
-                    display_article_tile(article, category)
+
+                    # Use modulo to cycle through columns
+                    with cols[idx % 3]:
+                        display_article_tile(article, category)
             else:
                 st.warning("No articles found in the selected files.")
 
