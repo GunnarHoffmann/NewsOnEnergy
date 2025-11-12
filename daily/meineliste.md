@@ -1,0 +1,5 @@
+- https://renewablesnow.com/news/
+- https://www.neueenergie.net/
+- https://www.energie-experten.org/news
+- https://www.pv-magazine.com/news/
+- https://electrek.co/
