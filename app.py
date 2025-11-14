@@ -437,7 +437,7 @@ with tab1:
         )
 
     # Determine directory based on view type
-    directory = "DAILY" if view_type == "Daily" else "WEEKLY"
+    directory = f"NEWS/{'DAILY' if view_type == 'Daily' else 'WEEKLY'}"
     dir_path = Path(directory)
 
     # Get available dates for the selected view
