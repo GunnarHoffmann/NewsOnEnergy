@@ -397,6 +397,130 @@ def display_article_tile(article, category):
 
     st.markdown(tile_html, unsafe_allow_html=True)
 
+def parse_events_from_file(file_path):
+    """Parse events from a markdown file with event format."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        events = []
+        # Split by ### headers which denote individual events
+        entries = re.split(r'\n###\s+', content)
+
+        for entry in entries[1:]:  # Skip first split (header info)
+            event = {}
+
+            # Extract event title (first line after ###)
+            lines = entry.strip().split('\n')
+            if not lines:
+                continue
+
+            # First line contains date and name
+            title_line = lines[0].strip()
+            event['title'] = title_line
+
+            # Extract structured fields
+            for line in lines[1:]:
+                line = line.strip()
+
+                # Extract date
+                if line.startswith('- **Datum:**'):
+                    date_str = line.replace('- **Datum:**', '').strip()
+                    event['date'] = date_str
+
+                # Extract name
+                elif line.startswith('- **Name:**'):
+                    name = line.replace('- **Name:**', '').strip()
+                    event['name'] = name
+
+                # Extract location
+                elif line.startswith('- **Ort:**'):
+                    location = line.replace('- **Ort:**', '').strip()
+                    event['location'] = location
+
+                # Extract link
+                elif line.startswith('- **Link:**'):
+                    url = line.replace('- **Link:**', '').strip()
+                    event['url'] = url
+
+                # Extract days until event
+                elif line.startswith('- **Differenz zu heute:**'):
+                    days_str = line.replace('- **Differenz zu heute:**', '').strip()
+                    event['days_until'] = days_str
+
+            if event.get('name') and event.get('date'):
+                events.append(event)
+
+        return events
+
+    except Exception as e:
+        st.error(f"Error parsing event file {file_path}: {str(e)}")
+        return []
+
+def display_event_tile(event, event_type):
+    """Display an event as a nice clickable tile."""
+    name = event.get('name', 'Untitled Event')
+    date = event.get('date', '')
+    location = event.get('location', '')
+    url = event.get('url', '')
+    days_until = event.get('days_until', '')
+
+    # Escape HTML special characters
+    name = html.escape(name)
+    date = html.escape(date)
+    location = html.escape(location)
+    url_escaped = html.escape(url) if url else ''
+    days_until = html.escape(days_until)
+
+    # Create description with location and days until
+    description = f"📍 {location}"
+    if days_until:
+        description += f" • ⏰ {days_until}"
+
+    # Create tile HTML
+    if url:
+        tile_html = f"""
+        <a href="{url_escaped}" target="_blank" rel="noopener noreferrer" class="article-tile-link" style="pointer-events: all;">
+            <div class="article-tile" style="pointer-events: none;">
+                <div class="category-badge">{event_type}</div>
+                <div class="article-title">{name}</div>
+                <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
+                <div class="article-description">{description}</div>
+            </div>
+        </a>
+        """
+    else:
+        tile_html = f"""
+        <div class="article-tile" style="opacity: 0.7;">
+            <div class="category-badge">{event_type}</div>
+            <div class="article-title">{name}</div>
+            <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
+            <div class="article-description">{description}</div>
+        </div>
+        """
+
+    st.markdown(tile_html, unsafe_allow_html=True)
+
+def get_available_event_dates(directory):
+    """Scan directory and extract all unique dates from event filenames."""
+    dir_path = Path(directory)
+    if not dir_path.exists():
+        return set()
+
+    dates = set()
+    for file in dir_path.glob("*.md"):
+        # Extract date from filename (YYYYMMDD format)
+        match = re.match(r"(\d{8})_", file.name)
+        if match:
+            date_str = match.group(1)
+            try:
+                date_obj = datetime.strptime(date_str, "%Y%m%d").date()
+                dates.add(date_obj)
+            except ValueError:
+                continue
+
+    return dates
+
 # Title with professional caption
 st.markdown("""
 <div style="margin-bottom: 2rem;">
@@ -545,4 +669,113 @@ with tab1:
     st.caption(f"Viewing from: {dir_path.absolute()}")
 
 with tab2:
-    st.info("in progress")
+    # Events directory
+    events_directory = "EVENTS"
+    events_dir_path = Path(events_directory)
+
+    # Get available dates for events
+    available_event_dates = get_available_event_dates(events_directory)
+
+    # Create two columns for the selectors
+    col1, col2 = st.columns(2)
+
+    with col1:
+        # Date selector with info about available dates
+        if available_event_dates:
+            min_event_date = min(available_event_dates)
+            max_event_date = max(available_event_dates)
+
+            selected_event_date = st.date_input(
+                f"Select Event Date ({len(available_event_dates)} dates available)",
+                value=max_event_date,  # Default to most recent date
+                min_value=min_event_date,
+                max_value=max_event_date,
+                key="event_date"
+            )
+
+            # Show info if selected date is not available
+            if selected_event_date not in available_event_dates:
+                st.warning(f"⚠️ No event data available for {selected_event_date.strftime('%Y-%m-%d')}. Available dates: {len(available_event_dates)}")
+        else:
+            selected_event_date = st.date_input(
+                "Select Event Date",
+                value=datetime.now(),
+                max_value=datetime.now(),
+                key="event_date"
+            )
+            st.error(f"No event data found in '{events_directory}' directory!")
+
+    # Check if directory exists
+    if not events_dir_path.exists():
+        st.error(f"Directory '{events_directory}' not found!")
+    else:
+        # Format date as YYYYMMDD
+        event_date_str = selected_event_date.strftime("%Y%m%d")
+
+        # Find all event files for the selected date
+        event_pattern = f"{event_date_str}_*.md"
+        matching_event_files = list(events_dir_path.glob(event_pattern))
+
+        if not matching_event_files:
+            st.warning(f"No event files found for date {selected_event_date.strftime('%Y-%m-%d')}.")
+            if available_event_dates:
+                st.info(f"Try one of these available dates: {', '.join([d.strftime('%Y-%m-%d') for d in sorted(available_event_dates, reverse=True)[:5]])}")
+        else:
+            # Extract event types from filenames
+            event_types = []
+            for file in matching_event_files:
+                # Extract event type (part after date and underscore, before .md)
+                event_type = file.stem.replace(f"{event_date_str}_", "")
+                event_types.append(event_type)
+
+            with col2:
+                # Multi-select for event types
+                selected_event_types = st.multiselect(
+                    "Available event types (select one or more)",
+                    event_types,
+                    default=event_types,  # Select all by default
+                    key="event_types"
+                )
+
+            if not selected_event_types:
+                st.info("Please select at least one event type to view events.")
+            else:
+                # Collect all events from selected types
+                all_events = []
+                event_type_map = {}  # Map events to their source type
+
+                for event_type in selected_event_types:
+                    file_path = events_dir_path / f"{event_date_str}_{event_type}.md"
+                    events = parse_events_from_file(file_path)
+
+                    for event in events:
+                        all_events.append(event)
+                        # Store which type this event came from
+                        event_key = event.get('url', '') or event.get('name', '')
+                        if event_key not in event_type_map:
+                            event_type_map[event_key] = event_type
+
+                # Display summary
+                st.divider()
+                st.subheader(f"📅 {len(all_events)} Events - {selected_event_date.strftime('%Y-%m-%d')}")
+                st.markdown('<div class="stylish-caption">Upcoming AI Events</div>', unsafe_allow_html=True)
+
+                # Display events as tiles in 3-column grid
+                if all_events:
+                    # Create 3 columns for responsive grid layout
+                    cols = st.columns(3)
+
+                    # Distribute events across columns
+                    for idx, event in enumerate(all_events):
+                        event_key = event.get('url', '') or event.get('name', '')
+                        event_type = event_type_map.get(event_key, selected_event_types[0])
+
+                        # Use modulo to cycle through columns
+                        with cols[idx % 3]:
+                            display_event_tile(event, event_type)
+                else:
+                    st.warning("No events found in the selected files.")
+
+    # Footer
+    st.divider()
+    st.caption(f"Viewing events from: {events_dir_path.absolute()}")
