@@ -690,6 +690,10 @@ with tab1:
                 default=categories  # Select all by default
             )
 
+            # Generate Management Summary button
+            if st.button("Generate Management Summary"):
+                st.info("Management Summary generation feature coming soon!")
+
             if not selected_categories:
                 st.info("Please select at least one topic to view articles.")
             else:
