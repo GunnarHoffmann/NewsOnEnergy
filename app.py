@@ -413,6 +413,7 @@ def get_country_flag(country_name):
         'deutschland': '🇩🇪',
         'germany': '🇩🇪',
         'england': '🇬🇧',
+        'england (uk)': '🇬🇧',
         'uk': '🇬🇧',
         'united kingdom': '🇬🇧',
         'britain': '🇬🇧',
@@ -502,9 +503,12 @@ def parse_events_from_file(file_path):
                     url = line.replace('- **Link:**', '').strip()
                     event['url'] = url
 
-                # Extract days until event
+                # Extract days until event (support both German formats)
                 elif line.startswith('- **Differenz zu heute:**'):
                     days_str = line.replace('- **Differenz zu heute:**', '').strip()
+                    event['days_until'] = days_str
+                elif line.startswith('- **Noch Tage:**'):
+                    days_str = line.replace('- **Noch Tage:**', '').strip()
                     event['days_until'] = days_str
 
             if event.get('name') and event.get('date'):
