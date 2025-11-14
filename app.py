@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import re
 import html
+import math
 from datetime import datetime, timedelta
 from pathlib import Path
 from collections import defaultdict
@@ -727,13 +728,17 @@ with tab1:
                     # Create 3 columns for responsive grid layout
                     cols = st.columns(3)
 
-                    # Distribute articles across columns
+                    # Calculate articles per column for sequential distribution (better mobile sorting)
+                    articles_per_col = math.ceil(len(unique_articles) / 3)
+
+                    # Distribute articles across columns sequentially
                     for idx, article in enumerate(unique_articles):
                         article_key = article.get('url', '') or article.get('title', '')
                         category = category_map.get(article_key, selected_categories[0])
 
-                        # Use modulo to cycle through columns
-                        with cols[idx % 3]:
+                        # Determine column index sequentially (not modulo)
+                        col_idx = min(idx // articles_per_col, 2)  # Ensure max index is 2
+                        with cols[col_idx]:
                             display_article_tile(article, category)
                 else:
                     st.warning("No articles found in the selected files.")
@@ -852,13 +857,17 @@ with tab2:
                     # Create 3 columns for responsive grid layout
                     cols = st.columns(3)
 
-                    # Distribute events across columns
+                    # Calculate events per column for sequential distribution (better mobile sorting)
+                    events_per_col = math.ceil(len(all_events) / 3)
+
+                    # Distribute events across columns sequentially
                     for idx, event in enumerate(all_events):
                         event_key = event.get('url', '') or event.get('name', '')
                         event_type = event_type_map.get(event_key, selected_event_types[0])
 
-                        # Use modulo to cycle through columns
-                        with cols[idx % 3]:
+                        # Determine column index sequentially (not modulo)
+                        col_idx = min(idx // events_per_col, 2)  # Ensure max index is 2
+                        with cols[col_idx]:
                             display_event_tile(event, event_type)
                 else:
                     st.warning("No events found in the selected files.")
