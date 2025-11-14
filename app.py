@@ -397,6 +397,34 @@ def display_article_tile(article, category):
 
     st.markdown(tile_html, unsafe_allow_html=True)
 
+def get_country_flag(location):
+    """Return country flag emoji based on event location."""
+    location_lower = location.lower()
+
+    # Swiss cities and locations
+    swiss_locations = ['bern', 'zürich', 'zurich', 'basel', 'geneva', 'genève', 'lausanne',
+                       'luzern', 'lucerne', 'rotkreuz', 'zug', 'switzerland', 'schweiz', 'suisse']
+
+    # German cities and locations
+    german_locations = ['berlin', 'hamburg', 'münchen', 'munich', 'köln', 'cologne', 'frankfurt',
+                        'stuttgart', 'düsseldorf', 'dusseldorf', 'dortmund', 'essen', 'leipzig',
+                        'dresden', 'hannover', 'nuremberg', 'nürnberg', 'germany', 'deutschland']
+
+    # UK cities and locations
+    uk_locations = ['london', 'manchester', 'birmingham', 'leeds', 'glasgow', 'liverpool',
+                    'newcastle', 'sheffield', 'bristol', 'cardiff', 'edinburgh', 'uk', 'england',
+                    'scotland', 'wales', 'britain']
+
+    # Check which country the location belongs to
+    if any(city in location_lower for city in swiss_locations):
+        return '🇨🇭'
+    elif any(city in location_lower for city in german_locations):
+        return '🇩🇪'
+    elif any(city in location_lower for city in uk_locations):
+        return '🇬🇧'
+    else:
+        return ''  # No flag if country cannot be determined
+
 def parse_events_from_file(file_path):
     """Parse events from a markdown file with event format."""
     try:
@@ -465,6 +493,9 @@ def display_event_tile(event, event_type):
     url = event.get('url', '')
     days_until = event.get('days_until', '')
 
+    # Get country flag for location
+    country_flag = get_country_flag(location)
+
     # Escape HTML special characters
     name = html.escape(name)
     date = html.escape(date)
@@ -472,8 +503,8 @@ def display_event_tile(event, event_type):
     url_escaped = html.escape(url) if url else ''
     days_until = html.escape(days_until)
 
-    # Create description with location and days until
-    description = f"📍 {location}"
+    # Create description with country flag, location and days until
+    description = f"{country_flag} 📍 {location}" if country_flag else f"📍 {location}"
     if days_until:
         description += f" • ⏰ {days_until}"
 
