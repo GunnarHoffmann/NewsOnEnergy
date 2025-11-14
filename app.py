@@ -891,7 +891,7 @@ with tab2:
 
                     for event in all_events:
                         event_key = event.get('url', '') or event.get('name', '')
-                        event_type = event_type_map.get(event_key, selected_event_types[0])
+                        event_type = html.escape(event_type_map.get(event_key, selected_event_types[0]))
 
                         # Get event details
                         name = html.escape(event.get('name', 'Untitled Event'))
