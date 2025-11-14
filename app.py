@@ -50,8 +50,10 @@ st.markdown("""
     box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
     cursor: pointer;
     position: relative;
-    height: 100%;
-    min-height: 160px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 .article-tile:hover {
     box-shadow: 0 4px 12px rgba(234,28,10,0.12), 0 2px 6px rgba(0,0,0,0.08);
