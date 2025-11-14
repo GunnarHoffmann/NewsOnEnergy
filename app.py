@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import re
 import html
-import math
 from datetime import datetime, timedelta
 from pathlib import Path
 from collections import defaultdict
@@ -147,6 +146,21 @@ h2, h3 {
     width: 40px;
     height: 2px;
     background: linear-gradient(90deg, #EA1C0A 0%, rgba(234,28,10,0) 100%);
+}
+
+/* CSS Grid container for tiles */
+.tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+/* Responsive: 1 column on mobile */
+@media (max-width: 768px) {
+    .tiles-grid {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -368,7 +382,7 @@ def deduplicate_articles(articles):
     return unique_articles
 
 def display_article_tile(article, category):
-    """Display an article as a nice clickable tile."""
+    """Return HTML for an article tile (does not render directly)."""
     title = article.get('title', 'Untitled')
     description = article.get('description', '')
     url = article.get('url', '')
@@ -398,7 +412,7 @@ def display_article_tile(article, category):
         </div>
         """
 
-    st.markdown(tile_html, unsafe_allow_html=True)
+    return tile_html
 
 def get_country_flag(country_name):
     """Return country flag emoji based on country name from markdown section."""
@@ -520,7 +534,7 @@ def parse_events_from_file(file_path):
         return []
 
 def display_event_tile(event, event_type):
-    """Display an event as a nice clickable tile."""
+    """Return HTML for an event tile (does not render directly)."""
     name = event.get('name', 'Untitled Event')
     date = event.get('date', '')
     location = event.get('location', '')
@@ -570,7 +584,7 @@ def display_event_tile(event, event_type):
         </div>
         """
 
-    st.markdown(tile_html, unsafe_allow_html=True)
+    return tile_html
 
 def get_available_event_dates(directory):
     """Scan directory and extract all unique dates from event filenames."""
@@ -723,23 +737,18 @@ with tab1:
                 st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
                 st.markdown('<div class="stylish-caption">Agent View</div>', unsafe_allow_html=True)
 
-                # Display articles as tiles in 3-column grid
+                # Display articles as tiles in CSS Grid
                 if unique_articles:
-                    # Create 3 columns for responsive grid layout
-                    cols = st.columns(3)
-
-                    # Calculate articles per column for sequential distribution (better mobile sorting)
-                    articles_per_col = math.ceil(len(unique_articles) / 3)
-
-                    # Distribute articles across columns sequentially
-                    for idx, article in enumerate(unique_articles):
+                    # Collect all article tiles HTML
+                    tiles_html = []
+                    for article in unique_articles:
                         article_key = article.get('url', '') or article.get('title', '')
                         category = category_map.get(article_key, selected_categories[0])
+                        tiles_html.append(display_article_tile(article, category))
 
-                        # Determine column index sequentially (not modulo)
-                        col_idx = min(idx // articles_per_col, 2)  # Ensure max index is 2
-                        with cols[col_idx]:
-                            display_article_tile(article, category)
+                    # Render all tiles in a CSS Grid container
+                    grid_html = f'<div class="tiles-grid">{"".join(tiles_html)}</div>'
+                    st.markdown(grid_html, unsafe_allow_html=True)
                 else:
                     st.warning("No articles found in the selected files.")
 
@@ -852,23 +861,18 @@ with tab2:
                 st.subheader(f"📅 {len(all_events)} Events - {selected_event_date.strftime('%Y-%m-%d')}")
                 st.markdown('<div class="stylish-caption">Upcoming AI Events</div>', unsafe_allow_html=True)
 
-                # Display events as tiles in 3-column grid
+                # Display events as tiles in CSS Grid
                 if all_events:
-                    # Create 3 columns for responsive grid layout
-                    cols = st.columns(3)
-
-                    # Calculate events per column for sequential distribution (better mobile sorting)
-                    events_per_col = math.ceil(len(all_events) / 3)
-
-                    # Distribute events across columns sequentially
-                    for idx, event in enumerate(all_events):
+                    # Collect all event tiles HTML
+                    tiles_html = []
+                    for event in all_events:
                         event_key = event.get('url', '') or event.get('name', '')
                         event_type = event_type_map.get(event_key, selected_event_types[0])
+                        tiles_html.append(display_event_tile(event, event_type))
 
-                        # Determine column index sequentially (not modulo)
-                        col_idx = min(idx // events_per_col, 2)  # Ensure max index is 2
-                        with cols[col_idx]:
-                            display_event_tile(event, event_type)
+                    # Render all tiles in a CSS Grid container
+                    grid_html = f'<div class="tiles-grid">{"".join(tiles_html)}</div>'
+                    st.markdown(grid_html, unsafe_allow_html=True)
                 else:
                     st.warning("No events found in the selected files.")
 
