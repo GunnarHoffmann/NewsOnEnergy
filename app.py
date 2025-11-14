@@ -413,6 +413,7 @@ def get_country_flag(country_name):
         'deutschland': '🇩🇪',
         'germany': '🇩🇪',
         'england': '🇬🇧',
+        'england (uk)': '🇬🇧',
         'uk': '🇬🇧',
         'united kingdom': '🇬🇧',
         'britain': '🇬🇧',
