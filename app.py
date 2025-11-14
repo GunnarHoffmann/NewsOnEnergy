@@ -742,7 +742,7 @@ with tab1:
 
                     for article in unique_articles:
                         article_key = article.get('url', '') or article.get('title', '')
-                        category = category_map.get(article_key, selected_categories[0])
+                        category = html.escape(category_map.get(article_key, selected_categories[0]))
 
                         # Get article details
                         title = html.escape(article.get('title', 'Untitled'))
