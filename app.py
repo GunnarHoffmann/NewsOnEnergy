@@ -147,6 +147,19 @@ h2, h3 {
     height: 2px;
     background: linear-gradient(90deg, #EA1C0A 0%, rgba(234,28,10,0) 100%);
 }
+
+/* Grid container for tiles - maintains sort order */
+.tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/* Ensure tiles don't have bottom margin in grid */
+.tiles-grid .article-tile {
+    margin: 0;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -722,19 +735,43 @@ with tab1:
                 st.subheader(f"📰 {len(unique_articles)} Articles - {selected_date.strftime('%Y-%m-%d')}")
                 st.markdown('<div class="stylish-caption">Agent View</div>', unsafe_allow_html=True)
 
-                # Display articles as tiles in 3-column grid
+                # Display articles as tiles using CSS Grid for proper sorting
                 if unique_articles:
-                    # Create 3 columns for responsive grid layout
-                    cols = st.columns(3)
+                    # Build all tiles HTML in a grid container
+                    tiles_html = '<div class="tiles-grid">'
 
-                    # Distribute articles across columns
-                    for idx, article in enumerate(unique_articles):
+                    for article in unique_articles:
                         article_key = article.get('url', '') or article.get('title', '')
-                        category = category_map.get(article_key, selected_categories[0])
+                        category = html.escape(category_map.get(article_key, selected_categories[0]))
 
-                        # Use modulo to cycle through columns
-                        with cols[idx % 3]:
-                            display_article_tile(article, category)
+                        # Get article details
+                        title = html.escape(article.get('title', 'Untitled'))
+                        description = html.escape(article.get('description', ''))
+                        url = article.get('url', '')
+                        url_escaped = html.escape(url) if url else ''
+
+                        # Add tile to grid
+                        if url:
+                            tiles_html += f"""
+                            <a href="{url_escaped}" target="_blank" rel="noopener noreferrer" class="article-tile-link" style="pointer-events: all;">
+                                <div class="article-tile" style="pointer-events: none;">
+                                    <div class="category-badge">{category}</div>
+                                    <div class="article-title">{title}</div>
+                                    <div class="article-description">{description}</div>
+                                </div>
+                            </a>
+                            """
+                        else:
+                            tiles_html += f"""
+                            <div class="article-tile" style="opacity: 0.7;">
+                                <div class="category-badge">{category}</div>
+                                <div class="article-title">{title}</div>
+                                <div class="article-description">{description}</div>
+                            </div>
+                            """
+
+                    tiles_html += '</div>'
+                    st.markdown(tiles_html, unsafe_allow_html=True)
                 else:
                     st.warning("No articles found in the selected files.")
 
@@ -847,19 +884,61 @@ with tab2:
                 st.subheader(f"📅 {len(all_events)} Events - {selected_event_date.strftime('%Y-%m-%d')}")
                 st.markdown('<div class="stylish-caption">Upcoming AI Events</div>', unsafe_allow_html=True)
 
-                # Display events as tiles in 3-column grid
+                # Display events as tiles using CSS Grid for proper sorting
                 if all_events:
-                    # Create 3 columns for responsive grid layout
-                    cols = st.columns(3)
+                    # Build all tiles HTML in a grid container
+                    tiles_html = '<div class="tiles-grid">'
 
-                    # Distribute events across columns
-                    for idx, event in enumerate(all_events):
+                    for event in all_events:
                         event_key = event.get('url', '') or event.get('name', '')
-                        event_type = event_type_map.get(event_key, selected_event_types[0])
+                        event_type = html.escape(event_type_map.get(event_key, selected_event_types[0]))
 
-                        # Use modulo to cycle through columns
-                        with cols[idx % 3]:
-                            display_event_tile(event, event_type)
+                        # Get event details
+                        name = html.escape(event.get('name', 'Untitled Event'))
+                        date = html.escape(event.get('date', ''))
+                        location = html.escape(event.get('location', ''))
+                        url = event.get('url', '')
+                        url_escaped = html.escape(url) if url else ''
+                        days_until = html.escape(event.get('days_until', ''))
+                        country = event.get('country', '')
+
+                        # Get country flag
+                        country_flag = get_country_flag(country)
+
+                        # Create description
+                        description = f"📍 {location}"
+                        if days_until:
+                            description += f" • ⏰ {days_until}"
+
+                        # Create flag element
+                        flag_html = f'<div style="position: absolute; top: 20px; right: 20px; font-size: 32px; line-height: 1;">{country_flag}</div>' if country_flag else ''
+
+                        # Add tile to grid
+                        if url:
+                            tiles_html += f"""
+                            <a href="{url_escaped}" target="_blank" rel="noopener noreferrer" class="article-tile-link" style="pointer-events: all;">
+                                <div class="article-tile" style="pointer-events: none; position: relative;">
+                                    {flag_html}
+                                    <div class="category-badge">{event_type}</div>
+                                    <div class="article-title">{name}</div>
+                                    <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
+                                    <div class="article-description">{description}</div>
+                                </div>
+                            </a>
+                            """
+                        else:
+                            tiles_html += f"""
+                            <div class="article-tile" style="opacity: 0.7; position: relative;">
+                                {flag_html}
+                                <div class="category-badge">{event_type}</div>
+                                <div class="article-title">{name}</div>
+                                <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
+                                <div class="article-description">{description}</div>
+                            </div>
+                            """
+
+                    tiles_html += '</div>'
+                    st.markdown(tiles_html, unsafe_allow_html=True)
                 else:
                     st.warning("No events found in the selected files.")
 
