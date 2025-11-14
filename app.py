@@ -829,6 +829,19 @@ with tab2:
                         if event_key not in event_type_map:
                             event_type_map[event_key] = event_type
 
+                # Sort events by date (upcoming events first)
+                def parse_event_date(event):
+                    """Parse event date for sorting, handling invalid dates."""
+                    date_str = event.get('date', '')
+                    if not date_str:
+                        return datetime.max  # Put events without dates at the end
+                    try:
+                        return datetime.strptime(date_str, '%Y-%m-%d')
+                    except ValueError:
+                        return datetime.max  # Put events with invalid dates at the end
+
+                all_events.sort(key=parse_event_date)
+
                 # Display summary
                 st.divider()
                 st.subheader(f"📅 {len(all_events)} Events - {selected_event_date.strftime('%Y-%m-%d')}")
