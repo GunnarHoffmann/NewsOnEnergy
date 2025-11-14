@@ -397,33 +397,29 @@ def display_article_tile(article, category):
 
     st.markdown(tile_html, unsafe_allow_html=True)
 
-def get_country_flag(location):
-    """Return country flag emoji based on event location."""
-    location_lower = location.lower()
+def get_country_flag(country_name):
+    """Return country flag emoji based on country name from markdown section."""
+    if not country_name:
+        return ''
 
-    # Swiss cities and locations
-    swiss_locations = ['bern', 'zürich', 'zurich', 'basel', 'geneva', 'genève', 'lausanne',
-                       'luzern', 'lucerne', 'rotkreuz', 'zug', 'switzerland', 'schweiz', 'suisse']
+    country_lower = country_name.lower()
 
-    # German cities and locations
-    german_locations = ['berlin', 'hamburg', 'münchen', 'munich', 'köln', 'cologne', 'frankfurt',
-                        'stuttgart', 'düsseldorf', 'dusseldorf', 'dortmund', 'essen', 'leipzig',
-                        'dresden', 'hannover', 'nuremberg', 'nürnberg', 'germany', 'deutschland']
+    # Map country names to flag emojis
+    country_flags = {
+        'schweiz': '🇨🇭',
+        'switzerland': '🇨🇭',
+        'suisse': '🇨🇭',
+        'svizzera': '🇨🇭',
+        'deutschland': '🇩🇪',
+        'germany': '🇩🇪',
+        'england': '🇬🇧',
+        'uk': '🇬🇧',
+        'united kingdom': '🇬🇧',
+        'britain': '🇬🇧',
+        'great britain': '🇬🇧'
+    }
 
-    # UK cities and locations
-    uk_locations = ['london', 'manchester', 'birmingham', 'leeds', 'glasgow', 'liverpool',
-                    'newcastle', 'sheffield', 'bristol', 'cardiff', 'edinburgh', 'uk', 'england',
-                    'scotland', 'wales', 'britain']
-
-    # Check which country the location belongs to
-    if any(city in location_lower for city in swiss_locations):
-        return '🇨🇭'
-    elif any(city in location_lower for city in german_locations):
-        return '🇩🇪'
-    elif any(city in location_lower for city in uk_locations):
-        return '🇬🇧'
-    else:
-        return ''  # No flag if country cannot be determined
+    return country_flags.get(country_lower, '')
 
 def parse_events_from_file(file_path):
     """Parse events from a markdown file with event format."""
@@ -432,7 +428,30 @@ def parse_events_from_file(file_path):
             content = f.read()
 
         events = []
-        # Split by ### headers which denote individual events
+        current_country = None
+
+        # Split content into lines to track country sections
+        lines_list = content.split('\n')
+
+        # First, identify country sections (## CountryName)
+        country_sections = {}
+        current_section_country = None
+        current_section_start = 0
+
+        for i, line in enumerate(lines_list):
+            # Check for country header (## followed by country name)
+            if line.strip().startswith('## ') and not line.strip().startswith('###'):
+                if current_section_country:
+                    # Save previous section
+                    country_sections[current_section_country] = (current_section_start, i)
+                current_section_country = line.strip()[3:].strip()  # Remove "## "
+                current_section_start = i
+
+        # Save the last section
+        if current_section_country:
+            country_sections[current_section_country] = (current_section_start, len(lines_list))
+
+        # Now parse events and assign them to countries based on their position
         entries = re.split(r'\n###\s+', content)
 
         for entry in entries[1:]:  # Skip first split (header info)
@@ -446,6 +465,18 @@ def parse_events_from_file(file_path):
             # First line contains date and name
             title_line = lines[0].strip()
             event['title'] = title_line
+
+            # Find which country section this event belongs to
+            # Search for the event's title line in the original content
+            event_position = content.find(f"### {title_line}")
+            if event_position != -1:
+                # Determine which country section this position falls into
+                for country, (start, end) in country_sections.items():
+                    section_start_pos = content.find('\n'.join(lines_list[start:end]))
+                    section_end_pos = section_start_pos + len('\n'.join(lines_list[start:end]))
+                    if section_start_pos <= event_position < section_end_pos:
+                        event['country'] = country
+                        break
 
             # Extract structured fields
             for line in lines[1:]:
@@ -492,9 +523,10 @@ def display_event_tile(event, event_type):
     location = event.get('location', '')
     url = event.get('url', '')
     days_until = event.get('days_until', '')
+    country = event.get('country', '')
 
-    # Get country flag for location
-    country_flag = get_country_flag(location)
+    # Get country flag from country section in markdown
+    country_flag = get_country_flag(country)
 
     # Escape HTML special characters
     name = html.escape(name)
@@ -503,16 +535,20 @@ def display_event_tile(event, event_type):
     url_escaped = html.escape(url) if url else ''
     days_until = html.escape(days_until)
 
-    # Create description with country flag, location and days until
-    description = f"{country_flag} 📍 {location}" if country_flag else f"📍 {location}"
+    # Create description with location and days until (no flag here anymore)
+    description = f"📍 {location}"
     if days_until:
         description += f" • ⏰ {days_until}"
+
+    # Create flag element for top right corner
+    flag_html = f'<div style="position: absolute; top: 20px; right: 20px; font-size: 32px; line-height: 1;">{country_flag}</div>' if country_flag else ''
 
     # Create tile HTML
     if url:
         tile_html = f"""
         <a href="{url_escaped}" target="_blank" rel="noopener noreferrer" class="article-tile-link" style="pointer-events: all;">
-            <div class="article-tile" style="pointer-events: none;">
+            <div class="article-tile" style="pointer-events: none; position: relative;">
+                {flag_html}
                 <div class="category-badge">{event_type}</div>
                 <div class="article-title">{name}</div>
                 <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
@@ -522,7 +558,8 @@ def display_event_tile(event, event_type):
         """
     else:
         tile_html = f"""
-        <div class="article-tile" style="opacity: 0.7;">
+        <div class="article-tile" style="opacity: 0.7; position: relative;">
+            {flag_html}
             <div class="category-badge">{event_type}</div>
             <div class="article-title">{name}</div>
             <div style="font-size: 12px; color: #EA1C0A; font-weight: 600; margin-bottom: 8px;">📅 {date}</div>
